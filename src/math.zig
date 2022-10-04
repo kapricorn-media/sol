@@ -133,7 +133,7 @@ pub const Vec3 = packed struct {
         return Self {
             .x = v1.x + v2.x,
             .y = v1.y + v2.y,
-            .z = v1.z - v2.z,
+            .z = v1.z + v2.z,
         };
     }
 
@@ -158,6 +158,63 @@ pub const Vec3 = packed struct {
     pub fn dot(v1: Self, v2: Self) f32
     {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    }
+};
+
+pub const Vec4 = packed struct {
+    x: f32 align(4),
+    y: f32 align(4),
+    z: f32 align(4),
+    w: f32 align(4),
+
+    const Self = @This();
+
+    pub const zero  = init(0.0, 0.0, 0.0, 0.0);
+    pub const one   = init(1.0, 1.0, 1.0, 1.0);
+
+    pub fn init(x: f32, y: f32, z: f32, w: f32) Self
+    {
+        return Self { .x = x, .y = y, .z = z, .w = w };
+    }
+
+    pub fn eql(v1: Self, v2: Self) bool
+    {
+        return v1.x == v2.x and v1.y == v2.y and v1.z == v2.z and v1.w == v2.w;
+    }
+
+    pub fn add(v1: Self, v2: Self) Self
+    {
+        return Self {
+            .x = v1.x + v2.x,
+            .y = v1.y + v2.y,
+            .z = v1.z + v2.z,
+            .w = v1.w + v2.w,
+        };
+    }
+
+    pub fn sub(v1: Self, v2: Self) Self
+    {
+        return Self {
+            .x = v1.x - v2.x,
+            .y = v1.y - v2.y,
+            .z = v1.z - v2.z,
+            .w = v1.w - v2.w,
+        };
+    }
+
+    pub fn divScalar(v: Self, s: f32) Self
+    {
+        return Self {
+            .x = v.x / s,
+            .y = v.y / s,
+            .z = v.z / s,
+            .w = v.w / s,
+        };
+    }
+
+    pub fn dot(v1: Self, v2: Self) f32
+    {
+        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
     }
 };
 

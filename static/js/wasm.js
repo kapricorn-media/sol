@@ -166,9 +166,19 @@ const glDrawArrays = function(type, offset, count) {
     gl.drawArrays(type, offset, count);
 };
 
+const promptUpload = function() {
+    document.getElementById("uploadInput").click();
+};
+
 const env = {
+    // site-specific functions
+    promptUpload,
+
+    // Debug functions
     consoleMessage,
     compileShader,
+
+    // GL functions
     linkShaderProgram,
     createTexture,
 
@@ -228,6 +238,12 @@ function wasmInit()
     _canvas = document.getElementById("canvas");
     gl = _canvas.getContext("webgl") || _canvas.getContext("experimental-webgl");
     updateCanvasSize();
+
+    _canvas.addEventListener("click", function(event) {
+        if (_wasmInstance !== null) {
+            _wasmInstance.exports.onClick(event.clientX, window.innerHeight - event.clientY);
+        }
+    });
 
     addEventListener("resize", function() {
         updateCanvasSize();

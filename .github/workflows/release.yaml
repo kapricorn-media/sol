@@ -31,5 +31,8 @@ jobs:
       - name: zip
         run: tar -czf sol.tar.gz sol
 
+      - name: mkdir
+        run: mkdir -p ~/ci/builds/sol
+
       - name: copy
         run: cp sol.tar.gz ~/ci/builds/sol/sol.`date '+%s'`.tar.gz

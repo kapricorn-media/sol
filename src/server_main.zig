@@ -44,8 +44,14 @@ fn serverCallback(
             }
         },
         .Post => {
-            try server.writeCode(writer, ._404);
-            try server.writeEndHeader(writer);
+            if (std.mem.eql(u8, request.uri, "/file")) {
+                std.log.info("{s}", .{request.body});
+                try server.writeCode(writer, ._200);
+                try server.writeEndHeader(writer);
+            } else {
+                try server.writeCode(writer, ._404);
+                try server.writeEndHeader(writer);
+            }
         },
     }
 }
