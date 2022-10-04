@@ -1,0 +1,15 @@
+[Unit]
+Description=sol
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+WorkingDirectory=/usr/bin/sol
+ExecStart=/usr/bin/sol/sol 443 /etc/letsencrypt/live/sol.ca/fullchain.pem /etc/letsencrypt/live/sol.ca/privkey.pem
+
+[Install]
+WantedBy=multi-user.target
