@@ -6,6 +6,8 @@ const server = @import("http-server");
 
 const config = @import("config");
 
+const engine = @import("engine.zig");
+
 const WASM_PATH = if (config.DEBUG) "zig-out/sol.wasm" else "sol.wasm";
 // const DOMAIN = if (config.DEBUG) "localhost" else "sol.com";
 const SERVER_IP = "0.0.0.0";
