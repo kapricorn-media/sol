@@ -1,3 +1,5 @@
+const std = @import("std");
+
 const Season = enum {
     Spring,
     Summer,
@@ -71,3 +73,8 @@ const GameStatus = struct {
     money: u32,
     inventory: []EconomyItem,
 };
+
+pub fn importFile(fileData: []const u8) !void
+{
+    std.log.info("importFile: {s}", .{fileData});
+}

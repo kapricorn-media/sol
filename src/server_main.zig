@@ -47,7 +47,8 @@ fn serverCallback(
         },
         .Post => {
             if (std.mem.eql(u8, request.uri, "/file")) {
-                std.log.info("{s}", .{request.body});
+                try engine.importFile(request.body);
+
                 try server.writeCode(writer, ._200);
                 try server.writeEndHeader(writer);
             } else {
